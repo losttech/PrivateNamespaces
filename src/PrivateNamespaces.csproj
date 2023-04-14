@@ -4,10 +4,14 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyName>LostTech.Win32.PrivateNamespaces</AssemblyName>
+    <RootNamespace>LostTech.Win32.PrivateNamespaces</RootNamespace>
 
     <!-- Package stuff -->
+    <Version>0.0.1</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <!--<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>-->
 
     <!-- The following is recommended for public projects -->
@@ -19,11 +23,13 @@
 
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- The following is recommended for public projects -->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="Vanara.PInvoke.Kernel32" Version="3.4.13" />
   </ItemGroup>
 
 </Project>

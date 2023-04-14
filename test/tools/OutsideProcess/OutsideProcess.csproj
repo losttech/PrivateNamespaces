@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+
+    <IsPackable>false</IsPackable>
+
+    <RootNamespace>LostTech.Win32.PrivateNamespaces</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\PrivateNamespaces.csproj" />
+  </ItemGroup>
+
+</Project>
