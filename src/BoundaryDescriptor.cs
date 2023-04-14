@@ -31,19 +31,23 @@ public sealed class BoundaryDescriptor: IDisposable {
 
         unsafe {
             fixed (byte* ptr = bytes) {
-                if (!this.Add(new PSID((IntPtr)ptr), out var newHandle))
-                    throw new Win32Exception();
-                this.handle.SetHandleAsInvalid();
-                this.handle = new SafeBoundaryDescriptorHandle(newHandle.DangerousGetHandle());
+                this.Add(new PSID((IntPtr)ptr));
             }
         }
     }
 
-    public void Add(WellKnownSidType sidType) =>
-        this.Add(new SecurityIdentifier(sidType, domainSid: null));
+    public void Add(WellKnownSidType sidType)
+        => this.Add(new SecurityIdentifier(sidType, domainSid: null));
 
-    bool Add(PSID sid, out BoundaryDescriptorHandle newHandle) {
-        newHandle = this.handle;
+    void Add(PSID sid) {
+        if (!Add(this.handle, sid, out var newHandle))
+            throw new Win32Exception();
+        this.handle.SetHandleAsInvalid();
+        this.handle = new SafeBoundaryDescriptorHandle(newHandle.DangerousGetHandle());
+    }
+
+    static bool Add(BoundaryDescriptorHandle handle, PSID sid, out BoundaryDescriptorHandle newHandle) {
+        newHandle = handle;
         return Marshal.ReadByte(sid.DangerousGetHandle(), 7) == 16
             ? AddIntegrityLabelToBoundaryDescriptor(ref newHandle, sid)
             : AddSIDToBoundaryDescriptor(ref newHandle, sid);

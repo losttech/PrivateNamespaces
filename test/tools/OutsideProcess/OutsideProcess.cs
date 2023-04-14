@@ -19,7 +19,6 @@ public static class OutsideProcess {
         using var boundary = new BoundaryDescriptor(boundaryName,
                                                     BoundaryDescriptor.CreateFlags.None);
         boundary.Add(WellKnownSidType.WorldSid);
-        boundary.Add(WellKnownSidType.WinLowLabelSid);
         using var ns = PrivateNamespace.Open(boundary, namespaceName);
         using var semaphore = Semaphore.OpenExisting(semaphoreName);
         semaphore.Release();
